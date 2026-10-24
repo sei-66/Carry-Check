@@ -8,7 +8,7 @@
 - 開発・ビルド: Vite
 - 3D表示: Three.js
 - 計算処理: Web Worker
-- 公開先: GitHub Pages。配信ワークフローは有効化変数で制御し、公開前は無効。[CIとPagesの手順](development.md#ci-と-github-pages)を参照
+- 公開先: [GitHub Pages](https://sei-66.github.io/Carry-Check/)。mainの全検査に成功した成果物を配信し、有効化変数で停止できる。[CIとPagesの手順](development.md#ci-と-github-pages)を参照
 - 衝突・距離照会: 製品は独立f64の幾何区間。`@dimforge/rapier3d-compat` 0.21.0 はM1専用の比較診断、`three-mesh-bvh` 0.9.15 は比較用の開発依存
 - 品質確認: TypeScript strict、ESLint、Prettier、Vitest
 

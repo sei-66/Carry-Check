@@ -198,14 +198,14 @@ Markdown は末尾2スペースによる改行を保持し、コードの整形�
 
 リポジトリ変数 `PAGES_ENABLED` が文字列 `true` のときだけ配信できます。未設定または `false` では検査だけが動き、成果物のアップロードと配信ジョブはスキップします。有効化後は `main` へのpushで自動配信します。手動配信はActionsの `CI` → `Run workflow` でブランチ `main` を選び、`deploy_pages` を有効にします。既定の手動実行では検査だけを行います。PR・他ブランチ・定期実行からは配信しません。
 
-このリポジトリ `sei-66/Carry-Check` は、非公開のままpushしてCIを確認した後、パブリックへ切り替えてPagesを有効にします。公開範囲・Actions・Pages・ブランチ保護の設定対象はこのリポジトリに限定します。GitHub側の準備は次の順で行います。
+このリポジトリ `sei-66/Carry-Check` はPublicで、[Pagesの実URL](https://sei-66.github.io/Carry-Check/)を配信しています。SourceはGitHub Actions、HTTPSは強制、`PAGES_ENABLED=true`、配信環境はブランチmainだけを許可します。mainは管理者にもPR経由・3必須チェック・最新化を要求し、force pushと削除を禁止します。未解決のレビュー会話は解決が必要で、必須承認者数は個人開発に合わせ0人です。これらの設定対象はこのリポジトリに限定します。設定の再確認と手動配信は次の順で行います。
 
-1. 設定を含むコミットをpushし、Actionsで `check`・`workflows`・`secrets` の成功を確認します。ローカル検査の成功だけではGitHub CIの成功と扱いません。
+1. 変更は作業ブランチからPRを作成し、Actionsで `check`・`workflows`・`secrets` の成功を確認してからmainへ取り込みます。ローカル検査の成功だけではGitHub CIの成功と扱いません。
 2. Settings → Actions → Generalで公式Actionのみ許可し、完全SHA固定を必須にします。Workflow permissionsは読み取り専用、ActionsによるPR作成・承認は無効にします。
-3. 下記の公開前検査と[公開の受け入れ条件](verification.md#未確認事項と受け入れ条件)を確認し、Settings → General → Danger Zone → Change repository visibilityで、このリポジトリだけを **Public** に切り替えます。リポジトリの公開時点でGit履歴も閲覧可能になるため、秘密情報と住宅資料の確認は切替前に完了させます。
+3. Settings → Generalでこのリポジトリの公開範囲が **Public** であることを確認します。Git履歴も公開対象のため、下記の履歴・配信物検査を継続し、[受け入れ条件の残課題](verification.md#未確認事項と受け入れ条件)を確認します。
 4. `main` にPR経由の変更、上記3ジョブの必須チェック、ブランチの最新化、force push・削除の禁止を設定します。個人開発で承認者を確保できない場合は、他人の承認を必須にしてマージ不能にしないでください。
 5. Settings → PagesのSourceを **GitHub Actions** にし、Settings → Environmentsの `github-pages` を `main` だけに制限します。通常はブランチ名 `main` を許可し、タグは許可しません。必要に応じて承認者も設定します。成果物の保持は1日なので、それ以内に承認し、期限を超えたらmainで検査・配信を再実行します。
-6. Settings → Secrets and variables → Actions → Variablesで `PAGES_ENABLED=true` を設定し、mainの手動配信を実行します。公開範囲や変数の変更はこのワークフローの実行契機に含まれないため、初回は `deploy_pages` を有効にした手動実行が必要です。配信後は実URLの画面・Worker・JS/CSS・ライセンス通知を確認します。以後はmainへのpushで自動配信します。
+6. Settings → Secrets and variables → Actions → Variablesで `PAGES_ENABLED=true` を確認し、必要な場合はmainで `deploy_pages` を有効にした手動実行を行います。公開範囲や変数の変更はこのワークフローの実行契機に含まれないため、有効化直後も手動実行が必要です。配信後は実URLの画面・Worker・JS/CSS・ライセンス通知を確認します。通常はPR取り込み後のmainへのpushで自動配信します。
 
 配信を止めるときは `PAGES_ENABLED=false` にし、実行中の配信があればActionsで中断します。変数の無効化だけでは配信済みサイトを削除しないため、取り下げる場合はSettings → PagesでUnpublishします。
 
@@ -220,7 +220,7 @@ npm run preview -- --base=/Carry-Check/
 
 `http://127.0.0.1:4173/Carry-Check/`で固定経路と仮定の説明、寸法入力、実Workerの結果、住宅3Dと経路再生を確認します。リポジトリ名を変更した場合はbaseも変更します。通常パスへ戻す場合は`npm run build`で再ビルドします。
 
-一通り完成するまではリポジトリを非公開のまま開発します。公開前に、公開予定のブランチ・タグを反映した状態で CI の `secrets` ジョブが成功したことを確認します。ローカルで再確認する場合は、[公式リリース](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1)の gitleaks v8.30.1 を使い、以下を実行します。`--all` の対象は取得済みの Git 参照に限られるため、現在の `HEAD` も明示します。
+公開するブランチ・タグを反映した状態で CI の `secrets` ジョブが成功したことを確認します。ローカルで再確認する場合は、[公式リリース](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1)の gitleaks v8.30.1 を使い、以下を実行します。`--all` の対象は取得済みの Git 参照に限られるため、現在の `HEAD` も明示します。
 
 ```sh
 git fetch --all --tags
