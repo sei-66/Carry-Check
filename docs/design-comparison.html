@@ -1,0 +1,2200 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarryCheck | D0 デザイン比較</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: #273b30;
+        background: #f2f3ed;
+        font-family: 'Segoe UI', 'Yu Gothic UI', Meiryo, sans-serif;
+      }
+      main {
+        max-width: 1540px;
+        margin: auto;
+        padding: 40px 28px;
+      }
+      .overline {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        color: #5e6b60;
+      }
+      h1 {
+        font-size: clamp(25px, 3vw, 40px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        margin: 12px 0;
+      }
+      .intro {
+        max-width: 880px;
+        font-size: 14px;
+        line-height: 1.9;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 28px;
+        align-items: center;
+        margin: 26px 0;
+        padding: 17px 0;
+        border-block: 1px solid #cbd2c4;
+      }
+      label {
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      select {
+        min-height: 44px;
+        padding: 8px 12px;
+        border: 1px solid #849079;
+        border-radius: 6px;
+        font: inherit;
+        color: inherit;
+        background: #fffefa;
+      }
+      .effect-control {
+        min-height: 44px;
+      }
+      .effect-control input {
+        width: 18px;
+        height: 18px;
+        accent-color: #305c43;
+      }
+      .effect-note {
+        margin: -12px 0 26px;
+        font-size: 12px;
+        line-height: 1.8;
+        color: #5e6b60;
+      }
+      .article-heading {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px 12px;
+        margin-bottom: 12px;
+      }
+      .article-heading h2 {
+        margin: 0;
+      }
+      .expand {
+        min-height: 36px;
+        padding: 6px 10px;
+        font: inherit;
+        font-size: 12px;
+        color: #305c43;
+        border: 1px solid #849079;
+        border-radius: 5px;
+        background: #fffefa;
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid #305c43;
+        outline-offset: 3px;
+      }
+      .comparison {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .comparison.single {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 1280px;
+        margin: auto;
+      }
+      article {
+        min-width: 0;
+      }
+      article[hidden] {
+        display: none;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 0 0 10px;
+        line-height: 1.6;
+      }
+      .choice {
+        font-size: 10px;
+        padding: 4px 7px;
+        border: 1px solid #305c43;
+        color: #305c43;
+        margin-left: 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+      .frame {
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid #cbd2c4;
+        border-radius: 8px;
+        background: white;
+      }
+      .frame.mobile {
+        max-width: 375px;
+        margin-inline: auto;
+      }
+      iframe {
+        display: block;
+        border: 0;
+        transform-origin: top left;
+      }
+      .assessment {
+        font-size: 13px;
+        line-height: 1.85;
+        margin-top: 15px;
+        padding: 17px;
+        background: #fffefa;
+        border-radius: 7px;
+      }
+      .assessment p {
+        margin: 0 0 8px;
+      }
+      .assessment p:last-child {
+        margin: 0;
+      }
+      .assessment strong {
+        font-weight: 650;
+      }
+      .footnote {
+        border-top: 1px solid #cbd2c4;
+        padding-top: 22px;
+        margin-top: 30px;
+        font-size: 13px;
+        line-height: 1.9;
+      }
+      a {
+        color: #305c43;
+        text-underline-offset: 3px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 24px 16px;
+        }
+        .comparison {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="overline">CARRYCHECK / DESIGN STUDY</p>
+      <h1>同じ箱から、まったく違う体験を。</h1>
+      <p class="intro">
+        メゾネット賃貸の固定経路「玄関 → 階段 → 2階廊下 →
+        LDK入口」を対象とする外観の静的比較資料です。梱包外寸 1,200 × 400 × 400
+        mm、安全マージン各面 10 mm
+        の表示例を使い、図は箱とマージンの模式図で示します。この資料の準備状況や操作面はデザイン用の表示例で、現行製品の実装状況や搬入可否を示しません。現在の操作・結果の意味は<a
+          href="product-guide.md"
+          >操作ガイド</a
+        >を参照してください。BとDは採用、Eは参考資料、A/Cは非採用です。この資料では入力・計算・3D操作はできません。
+      </p>
+      <p class="intro"><a href="../">製品画面でB/Dを切り替える</a></p>
+      <div class="controls">
+        <label
+          >画面幅<select id="viewport">
+            <option value="desktop">PC · 1,280 px</option>
+            <option value="mobile">スマートフォン · 375 px</option>
+          </select></label
+        >
+        <label
+          >比較範囲<select id="concept">
+            <option value="all">3案を並べる</option>
+            <option value="b">B を大きく見る</option>
+            <option value="d">D を大きく見る</option>
+            <option value="e">E を大きく見る</option>
+          </select></label
+        >
+        <label class="effect-control"
+          ><input
+            id="effects"
+            type="checkbox"
+            checked
+          />装飾エフェクトを表示</label
+        >
+      </div>
+      <p class="effect-note" id="effect-note">
+        Bの印刷レイヤー、Dの金属の反射、Eの背景光のみが動きます。箱と準備状況は動きません。OSの「動きを減らす」設定を優先します。
+      </p>
+      <div class="comparison" id="comparison">
+        <article data-concept="b">
+          <div class="article-heading">
+            <h2>B · ポップ<span class="choice">採用</span></h2>
+            <button class="expand" data-expand="b">Bを大きく見る</button>
+          </div>
+          <div class="frame">
+            <iframe
+              title="B案のPC比較画面"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+          <div class="assessment">
+            <p>
+              <strong>意図</strong>
+              蛍光ライムとウルトラマリン、極太の和文ゴシック、Impactの大きな数字。梱包箱を一枚のポスターとして見せ、寸法は横長の「荷札」にまとめる。
+            </p>
+            <p>
+              <strong>トレンド → 画面</strong>
+              表現的タイポグラフィ、遊び心、デジタルとアナログの混交を、断ち切る大文字・非対称構図・網点・ずれた色版・硬い影で具体化。背景の色版だけがゆっくり動く。
+            </p>
+            <p>
+              <strong>残る評価</strong>
+              印象の強さと入力・結果の発見が両立するか。狭い画面でも太い書体で長い日本語が窮屈にならないか。外部フォントなしで意図した密度を保てるか。
+            </p>
+          </div>
+        </article>
+        <article data-concept="d">
+          <div class="article-heading">
+            <h2>D · ソリッド<span class="choice">採用</span></h2>
+            <button class="expand" data-expand="d">Dを大きく見る</button>
+          </div>
+          <div class="frame">
+            <iframe
+              title="D案のPC比較画面"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+          <div class="assessment">
+            <p>
+              <strong>意図</strong>
+              白・黒・銀を基調にオレンジを一点ずつ配る、机上の計測機器。見出しと入力値は丸い点を並べた独自のドット字形。黒い数値モジュールと白い模型面で入力と空間を分ける。
+            </p>
+            <p>
+              <strong>参照 → 画面</strong>
+              レトロなデジタル機器の表示と現代的なハードウェアの精密感を、5×7の円ドット、パネルの継ぎ目、細い目盛り、銀の反射、オレンジの丸い操作へ翻訳する。反射だけがゆっくり変わる。
+            </p>
+            <p>
+              <strong>残る評価</strong>
+              ドットの数字をすばやく読めるか。機器らしい密度が小画面でも窮屈にならないか。本文・結果は通常書体で読みやすさを保つ。
+            </p>
+          </div>
+        </article>
+        <article data-concept="e">
+          <div class="article-heading">
+            <h2>
+              E · Airglass / 透ける作業台<span class="choice">参考資料</span>
+            </h2>
+            <button class="expand" data-expand="e">Eを大きく見る</button>
+          </div>
+          <div class="frame">
+            <iframe
+              title="E案のPC比較画面"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+          <div class="assessment">
+            <p>
+              <strong>意図</strong>
+              パール、アイス、ラベンダーの明るい空間に、ガラスの輪郭と浮いたピル操作。大きな模型を左、入力カードを右、結果を下に置き、透明感と読みやすさを両立させる。
+            </p>
+            <p>
+              <strong>参照 → 画面</strong>
+              Appleが示す浮いた操作層・周囲色の映り込み・厚みと影をWebの独自表現へ。ユーザー指定のグラデーションを多層の光と屈折風の縁に使い、数値と結果には安定した明るい面を用意する。
+            </p>
+            <p>
+              <strong>残る評価</strong>
+              光の重なりの中で箱・マージンが区別できるか。浮いた操作が自然に見つかるか。動き低減時と小画面でも透明感が成立するか。
+            </p>
+          </div>
+        </article>
+      </div>
+      <p class="footnote">
+        製品にはB/Dを採用し、Eは参考資料として残しています。A/Cはユーザーの決定により非採用です。各案の操作性能は利用者テストで実証した結論ではありません。初見観察、読み上げ、iOS
+        Safari / Android Chrome の実機確認は品質ゲートとして残しています。<a
+          href="design.md"
+          >設計意図・表示仕様・残る検証</a
+        >に記録しています。
+      </p>
+    </main>
+    <script>
+      const popSpace = `<svg viewBox="0 0 670 380" role="img" aria-label="オレンジの梱包箱と破線の安全マージン。住宅・経路は未表示">
+<g transform="translate(175 90) scale(1.7)" stroke="#743718" stroke-width="1.5" stroke-linejoin="round"><path d="M0 40 61 9l127 57-64 32Z" fill="#ffbd7a"/><path d="M0 40v71l124 57V98Z" fill="#ff8a3d"/><path d="M124 98l64-32v69l-64 33Z" fill="#d76b25"/><path d="m23 28 127 58 20-10L43 18Z" fill="#fff3d6" stroke="none"/><path d="m-10 35 71-37 137 63v81l-73 37-135-63Z M-10 35l135 63 73-37M125 98v81" fill="none" stroke="#9b345e" stroke-width="2" stroke-dasharray="6 5"/></g></svg>`;
+      const popStyles = `
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          color: #1c2031;
+          background: #efeee8;
+          font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+          font-size: 14px;
+        }
+        h1,
+        h2,
+        p {
+          margin: 0;
+        }
+        .pop-header {
+          height: 78px;
+          background: #1c2031;
+          color: #efffd1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 40px;
+        }
+        .pop-brand {
+          font-family: Impact, 'Arial Black', sans-serif;
+          font-size: 35px;
+          letter-spacing: -0.035em;
+        }
+        .pop-brand span {
+          color: #d8ff44;
+        }
+        .pop-header p {
+          font-size: 11px;
+          letter-spacing: 0.07em;
+        }
+        .pop-main {
+          padding: 36px 40px 28px;
+        }
+        .pop-top {
+          display: grid;
+          grid-template-columns: 0.76fr 1.24fr;
+          gap: 35px;
+          align-items: center;
+        }
+        .pop-eyebrow {
+          font:
+            11px Consolas,
+            'Courier New',
+            monospace;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+        .pop-title {
+          font-size: 60px;
+          line-height: 1.25;
+          font-weight: 900;
+          letter-spacing: -0.08em;
+          margin: 20px 0 23px;
+        }
+        .pop-title span {
+          position: relative;
+          z-index: 0;
+          display: inline-block;
+        }
+        .pop-title span::before {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          background: #d8ff44;
+          left: -5px;
+          right: -9px;
+          bottom: 5px;
+          height: 27px;
+          transform: rotate(-3deg);
+        }
+        .pop-description {
+          font-size: 13px;
+          line-height: 1.95;
+          max-width: 350px;
+        }
+        .pop-edition {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          margin-top: 31px;
+        }
+        .pop-edition b {
+          font:
+            115px/0.8 Impact,
+            'Arial Black',
+            sans-serif;
+          color: #4b3bea;
+          letter-spacing: -0.035em;
+        }
+        .pop-edition span {
+          font-size: 12px;
+          line-height: 1.85;
+          border-left: 2px solid #1c2031;
+          padding-left: 18px;
+        }
+        .pop-poster {
+          position: relative;
+          isolation: isolate;
+          transform: rotate(-1.4deg);
+          border: 3px solid #1c2031;
+          background: #d8ff44;
+          box-shadow: 10px 11px 0 #1c2031;
+          min-width: 0;
+        }
+        .pop-print {
+          position: absolute;
+          z-index: -1;
+          inset: 9px -12px -12px 9px;
+          border: 3px solid #1c2031;
+          background: #8c7df4;
+          transform: translate(0, 0);
+          animation: print-shift 8s ease-in-out infinite;
+        }
+        .pop-poster-inner {
+          background: #d8ff44;
+          position: relative;
+          overflow: hidden;
+        }
+        .pop-poster-title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 23px 0;
+          gap: 15px;
+        }
+        .pop-poster-title b {
+          font:
+            59px/0.95 Impact,
+            'Arial Black',
+            sans-serif;
+          letter-spacing: -0.04em;
+        }
+        .pop-poster-title span {
+          font:
+            10px/1.55 Consolas,
+            'Courier New',
+            monospace;
+          text-align: right;
+        }
+        .pop-poster svg {
+          display: block;
+          width: 100%;
+          height: 327px;
+        }
+        .pop-sticker {
+          position: absolute;
+          right: 20px;
+          top: 86px;
+          background: #f47753;
+          border: 2px solid #1c2031;
+          padding: 8px 12px;
+          transform: rotate(8deg);
+          font-size: 11px;
+          font-weight: 800;
+          box-shadow: 3px 3px 0 #1c2031;
+        }
+        .pop-legend {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          padding: 9px 12px 16px;
+          font-size: 10px;
+          font-weight: 700;
+        }
+        .pop-tools {
+          border-top: 2px solid #1c2031;
+          background: #fffbed;
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          padding: 13px 20px;
+          font-size: 11px;
+        }
+        .pop-lower {
+          display: grid;
+          grid-template-columns: 1.22fr 1fr;
+          gap: 27px;
+          margin-top: 40px;
+        }
+        .pop-ticket {
+          border: 2px solid #1c2031;
+          background: #fffbed;
+          box-shadow: 5px 5px 0 #1c2031;
+          padding: 23px 25px;
+          position: relative;
+        }
+        .pop-section-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 14px;
+        }
+        .pop-section-head h2 {
+          font-size: 22px;
+          letter-spacing: -0.04em;
+          font-weight: 900;
+        }
+        .pop-section-head > span {
+          font:
+            10px Consolas,
+            'Courier New',
+            monospace;
+          letter-spacing: 0.1em;
+        }
+        .pop-fields {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          margin: 18px 0 20px;
+        }
+        .pop-field {
+          border-right: 1px solid #b9b7af;
+          padding: 0 17px;
+        }
+        .pop-field:first-child {
+          padding-left: 0;
+        }
+        .pop-field:last-child {
+          border: 0;
+          padding-right: 0;
+        }
+        .pop-field label {
+          display: block;
+          font-size: 11px;
+          margin-bottom: 7px;
+        }
+        .pop-field b {
+          font:
+            49px/1 Impact,
+            'Arial Black',
+            sans-serif;
+          letter-spacing: -0.025em;
+          font-variant-numeric: tabular-nums;
+        }
+        .pop-unit {
+          font:
+            11px Consolas,
+            'Courier New',
+            monospace;
+          letter-spacing: 0.06em;
+        }
+        .pop-margin {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          border-top: 1px dashed #5e605c;
+          padding-top: 14px;
+          font-size: 11px;
+        }
+        .pop-margin b {
+          font:
+            27px Impact,
+            'Arial Black',
+            sans-serif;
+          margin-left: auto;
+        }
+        .pop-margin p {
+          font-size: 10px;
+          line-height: 1.6;
+          color: #484a54;
+        }
+        .pop-cta {
+          margin-top: 20px;
+          padding: 14px 17px;
+          background: #4b3bea;
+          color: #fffbed;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          font-weight: 800;
+          border: 2px solid #1c2031;
+          box-shadow: 4px 4px 0 #1c2031;
+        }
+        .pop-cta span {
+          font-size: 22px;
+          line-height: 1;
+        }
+        .pop-hint {
+          font-size: 10px;
+          line-height: 1.85;
+          color: #484a54;
+          margin-top: 12px;
+        }
+        .pop-result {
+          background: #4b3bea;
+          color: #fffbed;
+          border: 2px solid #1c2031;
+          padding: 23px 27px;
+          position: relative;
+          box-shadow: 5px 5px 0 #1c2031;
+        }
+        .pop-result .pop-eyebrow {
+          color: #e4dfff;
+        }
+        .pop-result h2 {
+          font-size: 28px;
+          line-height: 1.5;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          margin: 14px 0 12px;
+        }
+        .pop-result p {
+          font-size: 12px;
+          line-height: 1.9;
+        }
+        .pop-result dl {
+          display: flex;
+          gap: 35px;
+          padding: 17px 0;
+          border-block: 1px solid #9f93f7;
+          margin: 20px 0 13px;
+        }
+        .pop-result dt {
+          font-size: 10px;
+          color: #e4dfff;
+        }
+        .pop-result dd {
+          font-size: 24px;
+          font-weight: 700;
+          margin: 6px 0 0;
+        }
+        .pop-result dd.code {
+          font:
+            18px Consolas,
+            monospace;
+          margin-top: 11px;
+        }
+        .pop-result .pop-hint {
+          color: #eeeaff;
+        }
+        .pop-result-detail {
+          font-size: 11px;
+          margin-top: 16px;
+          color: #e8ff98;
+        }
+        .pop-footer {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          margin-top: 32px;
+          padding-top: 17px;
+          border-top: 2px solid #1c2031;
+          font-size: 10px;
+          line-height: 1.9;
+        }
+        .pop-footer strong {
+          font-weight: 800;
+        }
+        .fx-off .pop-print {
+          animation: none;
+          display: none;
+        }
+        .fx-paused .pop-print {
+          animation-play-state: paused;
+        }
+        @keyframes print-shift {
+          0%,
+          100% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(4px, 3px);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .pop-print {
+            animation: none !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .pop-header {
+            height: 68px;
+            padding: 0 18px;
+          }
+          .pop-brand {
+            font-size: 29px;
+          }
+          .pop-header p {
+            font-size: 9px;
+            max-width: 100px;
+            text-align: right;
+            line-height: 1.8;
+          }
+          .pop-main {
+            padding: 26px 18px 24px;
+          }
+          .pop-top {
+            display: block;
+          }
+          .pop-title {
+            font-size: 45px;
+            margin: 16px 0 18px;
+          }
+          .pop-title span::before {
+            height: 20px;
+            bottom: 3px;
+          }
+          .pop-description {
+            font-size: 12px;
+          }
+          .pop-edition {
+            margin-top: 23px;
+            margin-bottom: 32px;
+            gap: 18px;
+          }
+          .pop-edition b {
+            font-size: 78px;
+          }
+          .pop-edition span {
+            font-size: 10px;
+          }
+          .pop-poster {
+            box-shadow: 5px 6px 0 #1c2031;
+            transform: rotate(-1deg);
+            margin: 0 5px 0 0;
+          }
+          .pop-poster-title {
+            padding: 17px 15px 0;
+          }
+          .pop-poster-title b {
+            font-size: 40px;
+          }
+          .pop-poster-title span {
+            font-size: 8px;
+          }
+          .pop-poster svg {
+            height: 221px;
+          }
+          .pop-sticker {
+            right: 10px;
+            top: 67px;
+            font-size: 8px;
+            padding: 5px 7px;
+          }
+          .pop-legend {
+            gap: 13px;
+            font-size: 8px;
+            padding: 5px 8px 12px;
+          }
+          .pop-tools {
+            padding: 12px;
+            font-size: 9px;
+            gap: 13px;
+          }
+          .pop-lower {
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-top: 32px;
+          }
+          .pop-ticket {
+            padding: 21px 19px;
+          }
+          .pop-section-head h2 {
+            font-size: 21px;
+          }
+          .pop-section-head > span {
+            font-size: 9px;
+          }
+          .pop-field {
+            padding: 0 10px;
+          }
+          .pop-field b {
+            font-size: 41px;
+          }
+          .pop-fields {
+            margin: 21px 0;
+          }
+          .pop-margin {
+            gap: 9px;
+          }
+          .pop-margin p {
+            font-size: 9px;
+          }
+          .pop-result {
+            padding: 22px;
+          }
+          .pop-result h2 {
+            font-size: 27px;
+          }
+          .pop-footer {
+            display: block;
+            margin-top: 28px;
+          }
+          .pop-footer p + p {
+            margin-top: 8px;
+          }
+        }
+      `;
+      function popPage() {
+        return `<header class="pop-header"><div class="pop-brand">CARRY<span>CHECK</span></div><p>家具選びに、もうひとつの視点。<br>住宅モデル準備中 / 開発版</p></header>
+          <main class="pop-main"><div class="pop-top"><section><p class="pop-eyebrow">PACK IT. TURN IT. CHECK IT.</p><h1 class="pop-title">向きを変えたら、<br><span>どうだろう。</span></h1><p class="pop-description">その箱の可能性を、別の角度から。<br>梱包外寸と、各面の安全マージンを入力。</p><div class="pop-edition"><b>02</b><span>メゾネット賃貸の固定経路。<br>玄関 → 階段 → 部屋。<br>必要な回転・傾斜は今後計算側で探索。</span></div></section>
+          <section class="pop-poster"><div class="pop-print" aria-hidden="true"></div><div class="pop-poster-inner"><div class="pop-poster-title"><b>ポップ</b><span>PACKAGE PREVIEW<br>HOUSING MODEL PENDING</span></div><span class="pop-sticker">梱包箱のみ</span>${popSpace}<div class="pop-legend"><span>梱包箱</span><span>破線：安全マージン</span></div><div class="pop-tools"><span>斜め　正面　上から</span><span>−　＋　視点リセット</span></div></div></section></div>
+          <div class="pop-lower"><section class="pop-ticket"><div class="pop-section-head"><h2>梱包サイズを入力</h2><span>PACKAGE / MM</span></div><div class="pop-fields"><div class="pop-field"><label>幅 W</label><b>1,200</b></div><div class="pop-field"><label>奥行 D</label><b>400</b></div><div class="pop-field"><label>高さ H</label><b>400</b></div></div><div class="pop-margin"><span>安全マージン</span><p>箱の各面に加える余裕<br>各辺には合計20 mmを追加</p><b>10</b><span class="pop-unit">mm / 各面</span></div><div class="pop-cta">入力と準備状況を確認 <span>↗</span></div><p class="pop-hint">梱包材を含む外寸 / 住宅モデル準備中 / 搬入可否は未判定です</p></section>
+          <section class="pop-result"><p class="pop-eyebrow">STATUS / 02 入力と準備状況</p><h2>住宅モデルは<br>準備中です。</h2><p>住宅・階段のモデルと経路探索は未実装です。<br>現在は入力と箱の表示を確認できます。</p><dl><div><dt>最小すき間</dt><dd>未測定</dd></div><div><dt>モデル版</dt><dd class="code">準備中</dd></div></dl><p class="pop-hint">すき間・注意箇所は未評価です。<br>実際の住宅の搬入可否を示すものではありません。</p><div class="pop-result-detail">固定経路：玄関 → 階段 → 部屋</div></section></div>
+          <footer class="pop-footer"><p><strong>SPACE NOTE</strong>　玄関 → 階段 → 部屋 / 住宅・階段モデルは未実装</p><p>比較用の静止画面 / 装飾の色版のみが動きます</p></footer></main>`;
+      }
+      // Original 5 x 7 glyphs made from circles. No font files or third-party assets.
+      const dotGlyphs = {
+        0: ['01110', '10001', '10011', '10101', '11001', '10001', '01110'],
+        1: ['00100', '01100', '00100', '00100', '00100', '00100', '01110'],
+        2: ['01110', '10001', '00001', '00010', '00100', '01000', '11111'],
+        3: ['11110', '00001', '00001', '01110', '00001', '00001', '11110'],
+        4: ['00010', '00110', '01010', '10010', '11111', '00010', '00010'],
+        5: ['11111', '10000', '10000', '11110', '00001', '00001', '11110'],
+        6: ['01110', '10000', '10000', '11110', '10001', '10001', '01110'],
+        7: ['11111', '00001', '00010', '00100', '01000', '01000', '01000'],
+        8: ['01110', '10001', '10001', '01110', '10001', '10001', '01110'],
+        9: ['01110', '10001', '10001', '01111', '00001', '00001', '01110'],
+        A: ['01110', '10001', '10001', '11111', '10001', '10001', '10001'],
+        C: ['01111', '10000', '10000', '10000', '10000', '10000', '01111'],
+        E: ['11111', '10000', '10000', '11110', '10000', '10000', '11111'],
+        H: ['10001', '10001', '10001', '11111', '10001', '10001', '10001'],
+        I: ['01110', '00100', '00100', '00100', '00100', '00100', '01110'],
+        K: ['10001', '10010', '10100', '11000', '10100', '10010', '10001'],
+        M: ['10001', '11011', '10101', '10101', '10001', '10001', '10001'],
+        N: ['10001', '11001', '11001', '10101', '10011', '10011', '10001'],
+        O: ['01110', '10001', '10001', '10001', '10001', '10001', '01110'],
+        R: ['11110', '10001', '10001', '11110', '10100', '10010', '10001'],
+        T: ['11111', '00100', '00100', '00100', '00100', '00100', '00100'],
+        U: ['10001', '10001', '10001', '10001', '10001', '10001', '01110'],
+        V: ['10001', '10001', '10001', '10001', '10001', '01010', '00100'],
+        Y: ['10001', '10001', '01010', '00100', '00100', '00100', '00100'],
+        ',': ['00000', '00000', '00000', '00000', '00100', '00100', '01000'],
+        '.': ['00000', '00000', '00000', '00000', '00000', '00110', '00110'],
+        '/': ['00001', '00001', '00010', '00100', '01000', '10000', '10000'],
+        ' ': ['00000', '00000', '00000', '00000', '00000', '00000', '00000'],
+      };
+      function dotText(value, className = '') {
+        const circles = [...value]
+          .flatMap((letter, index) => {
+            const glyph = dotGlyphs[letter];
+            if (!glyph) throw new Error(`Missing dot glyph: ${letter}`);
+            return glyph.flatMap((row, y) =>
+              [...row].flatMap((pixel, x) =>
+                pixel === '1'
+                  ? [
+                      `<circle cx="${index * 36 + x * 6 + 3}" cy="${y * 6 + 3}" r="1.95"/>`,
+                    ]
+                  : [],
+              ),
+            );
+          })
+          .join('');
+        return `<svg class="dot-type ${className}" viewBox="0 0 ${value.length * 36 - 6} 42" role="img" aria-label="${value}"><title>${value}</title>${circles}</svg>`;
+      }
+      const deviceSpace = `<svg viewBox="0 0 730 420" role="img" aria-label="銀色の梱包箱と破線の安全マージン。住宅・経路は未表示">
+<defs><linearGradient id="device-metal"><stop stop-color="#eef0f3"/><stop offset="1" stop-color="#a0a6af"/></linearGradient></defs><g transform="translate(190 85) scale(1.75)" stroke="#444b53" stroke-width="1.25" stroke-linejoin="round"><path d="M0 30 58 0l146 66-60 31Z" fill="#fafbfb"/><path d="M0 30v67l144 65V97Z" fill="url(#device-metal)"/><path d="M144 97l60-31v66l-60 30Z" fill="#a0a6af"/><path d="m27 17 146 67 18-10L45 8Z" fill="#f45a24" stroke="none"/><path d="m-9 24 67-35 156 72v79l-70 35-153-70Z M-9 24l153 72 70-35M144 96v79" fill="none" stroke="#7d4ead" stroke-dasharray="4 4"/></g></svg>`;
+      const airSpace = `<svg viewBox="0 0 780 475" role="img" aria-label="淡い青の梱包箱と破線の安全マージン。住宅・経路は未表示">
+<g transform="translate(210 100) scale(1.8)" stroke="#8398be" stroke-width="1.1" stroke-linejoin="round"><path d="M0 30 58 0l138 63-60 32Z" fill="#f5f0ff"/><path d="M0 30v64l136 62V95Z" fill="#d9dcf7"/><path d="M136 95l60-32v63l-60 30Z" fill="#b3b8e5"/><path d="m23 19 137 64 20-10L43 9Z" fill="#ffffff" stroke="none"/><path d="M-9 24 58-11l149 69v77l-71 33-145-67Z M-9 24l145 69 71-35M136 93v75" fill="none" stroke="#477896" stroke-width="1.4" stroke-dasharray="5 5"/></g></svg>`;
+      const deviceStyles = `
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          background: #eeeff0;
+          color: #24272c;
+          font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+          font-size: 14px;
+        }
+        h1,
+        h2,
+        p {
+          margin: 0;
+        }
+        .dot-type {
+          display: block;
+          fill: currentColor;
+          max-width: 100%;
+          height: auto;
+        }
+        .device-header {
+          height: 74px;
+          border-bottom: 1px solid #c4c8ce;
+          margin: 0 42px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .device-brand {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+        .device-brand .dot-type {
+          width: 162px;
+        }
+        .device-brand-mark {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #f45a24;
+        }
+        .device-header p {
+          font:
+            10px Consolas,
+            'Courier New',
+            monospace;
+          letter-spacing: 0.07em;
+          line-height: 1.7;
+          text-align: right;
+          color: #535b66;
+        }
+        .device-main {
+          padding: 29px 42px 28px;
+        }
+        .device-hero {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 28px;
+          margin-bottom: 28px;
+        }
+        .device-word {
+          width: 365px;
+          color: #2a2e33;
+        }
+        .device-hero-copy {
+          width: 380px;
+          border-left: 1px solid #b5bbc4;
+          padding-left: 27px;
+        }
+        .device-hero-copy h1 {
+          font-size: 25px;
+          line-height: 1.6;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+        }
+        .device-hero-copy p {
+          font-size: 12px;
+          line-height: 1.95;
+          color: #565e68;
+          margin-top: 9px;
+        }
+        .device-shell {
+          position: relative;
+          border: 1px solid #aeb5be;
+          border-radius: 25px;
+          padding: 13px;
+          background: linear-gradient(
+            120deg,
+            #f6f7f9,
+            #c8cdd4 48%,
+            #f7f8fa 73%,
+            #d5d9df
+          );
+          box-shadow:
+            0 13px 20px #4c53571a,
+            inset 0 1px white;
+          isolation: isolate;
+        }
+        .device-sheen {
+          position: absolute;
+          inset: 0;
+          border-radius: 25px;
+          background: linear-gradient(
+            115deg,
+            transparent 20%,
+            #fff9 43%,
+            transparent 62%
+          );
+          background-size: 200% 100%;
+          pointer-events: none;
+          z-index: -1;
+          animation: metal-reflection 12s ease-in-out infinite;
+        }
+        .device-screw {
+          position: absolute;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          border: 1px solid #858c96;
+          background: linear-gradient(
+            45deg,
+            #c7cdd4 42%,
+            #69727e 45%,
+            #69727e 53%,
+            #e5e9ee 56%
+          );
+          z-index: 3;
+        }
+        .device-screw.tl {
+          left: 7px;
+          top: 7px;
+        }
+        .device-screw.tr {
+          right: 7px;
+          top: 7px;
+        }
+        .device-screw.bl {
+          left: 7px;
+          bottom: 7px;
+        }
+        .device-screw.br {
+          right: 7px;
+          bottom: 7px;
+        }
+        .device-grid {
+          display: grid;
+          grid-template-columns: 285px minmax(0, 1fr);
+          gap: 12px;
+        }
+        .device-inputs {
+          background: #272b30;
+          color: #f4f5f7;
+          border: 1px solid #171b21;
+          border-radius: 15px;
+          padding: 23px 23px 20px;
+          box-shadow: inset 0 1px #555c66;
+        }
+        .device-eyebrow {
+          font:
+            10px Consolas,
+            'Courier New',
+            monospace;
+          letter-spacing: 0.1em;
+          color: #bcc3ce;
+        }
+        .device-inputs h2 {
+          font-size: 18px;
+          font-weight: 500;
+          margin-top: 11px;
+        }
+        .device-fields {
+          margin: 8px 0 0;
+        }
+        .device-field {
+          padding: 14px 0;
+          border-bottom: 1px solid #535b66;
+        }
+        .device-field label {
+          font-size: 12px;
+          color: #c1c8d1;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        .device-field label small {
+          font:
+            12px Consolas,
+            monospace;
+          color: #b9c0cc;
+        }
+        .device-field .dot-type {
+          height: 38px;
+          width: auto;
+          max-width: 100%;
+          color: #f1f3f7;
+        }
+        .device-margin {
+          padding-top: 17px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .device-margin p {
+          font-size: 12px;
+          line-height: 1.75;
+          color: #d4d8de;
+        }
+        .device-margin small {
+          display: block;
+          font-size: 12px;
+          color: #b6bfcb;
+        }
+        .device-margin-value {
+          display: flex;
+          align-items: flex-end;
+          gap: 6px;
+        }
+        .device-margin-value .dot-type {
+          height: 29px;
+          width: auto;
+          color: #ff824f;
+        }
+        .device-margin-value span {
+          font:
+            10px Consolas,
+            monospace;
+          color: #c1c8d1;
+        }
+        .device-hint {
+          font-size: 12px;
+          line-height: 1.85;
+          color: #bdc6d2;
+          margin-top: 13px;
+        }
+        .device-submit {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          border-top: 1px solid #535b66;
+          margin-top: 19px;
+          padding-top: 18px;
+        }
+        .device-submit strong {
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 1.8;
+        }
+        .device-knob {
+          height: 55px;
+          width: 55px;
+          flex: none;
+          display: grid;
+          place-items: center;
+          border: 1px solid #fca17e;
+          background: radial-gradient(circle at 40% 25%, #ff9663, #f45a24 64%);
+          box-shadow:
+            0 4px 0 #983c22,
+            0 5px 12px #1115,
+            inset 0 1px #ffb393;
+          color: #20252b;
+          border-radius: 50%;
+          font-size: 26px;
+        }
+        .device-workspace {
+          min-width: 0;
+          background: #f7f8f9;
+          border: 1px solid #b6bdc7;
+          border-radius: 15px;
+          overflow: hidden;
+        }
+        .device-stage-head {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 19px 24px 15px;
+          border-bottom: 1px solid #d1d5dc;
+          align-items: center;
+        }
+        .device-stage-head h2 {
+          font-size: 17px;
+          font-weight: 600;
+        }
+        .device-stage-head p {
+          font:
+            9px/1.7 Consolas,
+            monospace;
+          color: #59616d;
+        }
+        .device-mode {
+          background: #272c33;
+          color: #f87945;
+          font:
+            10px Consolas,
+            monospace;
+          border-radius: 4px;
+          padding: 7px 10px;
+        }
+        .device-stage {
+          position: relative;
+        }
+        .device-stage > svg {
+          width: 100%;
+          height: 382px;
+          display: block;
+        }
+        .device-legend {
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          padding: 0 16px 18px;
+          color: #5d6572;
+          font-size: 12px;
+        }
+        .device-tools {
+          padding: 14px 24px;
+          border-block: 1px solid #d1d5dc;
+          display: flex;
+          justify-content: space-between;
+          gap: 14px;
+          font-size: 12px;
+          background: #e9ecf0;
+        }
+        .device-tools strong {
+          font-weight: 500;
+          color: #d74b1d;
+        }
+        .device-result {
+          display: flex;
+          align-items: center;
+          gap: 28px;
+          background: #f4f5f7;
+          border: 1px solid #b5bcc5;
+          border-radius: 12px;
+          margin-top: 12px;
+          padding: 18px 24px;
+        }
+        .device-result-title {
+          flex: 1;
+        }
+        .device-result-title .device-eyebrow {
+          color: #616a75;
+        }
+        .device-result h2 {
+          font-size: 21px;
+          font-weight: 600;
+          margin-top: 7px;
+        }
+        .device-result p {
+          font-size: 12px;
+          line-height: 1.8;
+          color: #596270;
+          margin-top: 7px;
+        }
+        .device-result dl {
+          display: flex;
+          gap: 28px;
+          padding-left: 27px;
+          border-left: 1px solid #c3c9d0;
+          margin: 0;
+        }
+        .device-result dt {
+          font-size: 12px;
+          color: #626b77;
+        }
+        .device-result dd {
+          font-size: 23px;
+          line-height: 1.4;
+          margin: 7px 0 0;
+        }
+        .device-result dd.code {
+          font:
+            13px Consolas,
+            monospace;
+          margin-top: 13px;
+        }
+        .device-footer {
+          display: flex;
+          justify-content: space-between;
+          gap: 28px;
+          border-top: 1px solid #c3c9d0;
+          margin-top: 23px;
+          padding-top: 16px;
+          font-size: 12px;
+          line-height: 1.9;
+          color: #596270;
+        }
+        .device-footer p {
+          max-width: 650px;
+        }
+        .device-footer strong {
+          color: #343a44;
+          font-weight: 600;
+        }
+        .fx-off .device-sheen {
+          display: none;
+          animation: none;
+        }
+        .fx-paused .device-sheen {
+          animation-play-state: paused;
+        }
+        @keyframes metal-reflection {
+          0%,
+          100% {
+            background-position: 0 0;
+            opacity: 0.5;
+          }
+          50% {
+            background-position: 100% 0;
+            opacity: 0.9;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .device-sheen {
+            animation: none !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .device-header {
+            height: 68px;
+            margin: 0 18px;
+          }
+          .device-brand {
+            gap: 9px;
+          }
+          .device-brand .dot-type {
+            width: 139px;
+          }
+          .device-brand-mark {
+            width: 13px;
+            height: 13px;
+          }
+          .device-header p {
+            font-size: 12px;
+          }
+          .device-main {
+            padding: 24px 14px;
+          }
+          .device-hero {
+            display: block;
+            margin: 0 7px 24px;
+          }
+          .device-word {
+            width: 272px;
+          }
+          .device-hero-copy {
+            border-left: 0;
+            border-top: 1px solid #b5bbc4;
+            width: auto;
+            padding: 16px 0 0;
+            margin-top: 20px;
+          }
+          .device-hero-copy h1 {
+            font-size: 22px;
+          }
+          .device-hero-copy p {
+            font-size: 12px;
+          }
+          .device-shell {
+            padding: 10px;
+            border-radius: 20px;
+          }
+          .device-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          .device-inputs {
+            padding: 21px;
+            border-radius: 13px;
+          }
+          .device-inputs h2 {
+            font-size: 18px;
+          }
+          .device-field {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 18px 0;
+          }
+          .device-field label {
+            margin: 0;
+            display: block;
+            font-size: 12px;
+            line-height: 1.6;
+          }
+          .device-field label small {
+            display: block;
+          }
+          .device-field .dot-type {
+            height: 33px;
+          }
+          .device-margin {
+            padding-top: 18px;
+          }
+          .device-submit {
+            margin-top: 18px;
+          }
+          .device-stage-head {
+            padding: 17px 15px;
+            gap: 10px;
+          }
+          .device-stage-head h2 {
+            font-size: 15px;
+          }
+          .device-stage-head p {
+            font-size: 12px;
+          }
+          .device-stage > svg {
+            height: 250px;
+          }
+          .device-legend {
+            font-size: 12px;
+            gap: 13px;
+            padding-bottom: 17px;
+          }
+          .device-tools {
+            padding: 13px 14px;
+            font-size: 12px;
+            gap: 10px;
+          }
+          .device-result {
+            display: block;
+            padding: 20px 18px;
+          }
+          .device-result h2 {
+            font-size: 19px;
+          }
+          .device-result dl {
+            border-left: 0;
+            border-top: 1px solid #c3c9d0;
+            padding: 16px 0 0;
+            margin-top: 16px;
+            gap: 34px;
+          }
+          .device-result dd {
+            font-size: 22px;
+          }
+          .device-result dd.code {
+            font-size: 12px;
+          }
+          .device-footer {
+            display: block;
+            padding: 16px 7px 0;
+            font-size: 12px;
+          }
+          .device-footer p + p {
+            margin-top: 9px;
+          }
+        }
+      `;
+      const airStyles = `
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          background: #edf4fa;
+          color: #334b65;
+          font-family:
+            'BIZ UDPGothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic UI', Meiryo,
+            sans-serif;
+          font-size: 14px;
+        }
+        h1,
+        h2,
+        p {
+          margin: 0;
+        }
+        .air-shell {
+          position: relative;
+          isolation: isolate;
+          background:
+            radial-gradient(ellipse at 90% 8%, #d7d3f5 0, transparent 48%),
+            radial-gradient(ellipse at 13% 29%, #d1f5f9 0, transparent 48%),
+            linear-gradient(155deg, #f7fbff, #f4edf9 65%, #e0f3f7);
+          padding: 24px 38px 27px;
+        }
+        .air-atmosphere {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        .air-atmosphere::before,
+        .air-atmosphere::after {
+          content: '';
+          position: absolute;
+          width: 580px;
+          height: 580px;
+          border-radius: 50%;
+          background: radial-gradient(circle, #e7ccff66, transparent 66%);
+          right: -70px;
+          top: 90px;
+          animation: air-light 14s ease-in-out infinite;
+        }
+        .air-atmosphere::after {
+          width: 490px;
+          height: 490px;
+          left: 60px;
+          right: auto;
+          top: 260px;
+          background: radial-gradient(circle, #a1e9ee88, transparent 68%);
+          animation-delay: -7s;
+        }
+        .air-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 23px;
+          border: 1px solid #ffffffd9;
+          border-radius: 40px;
+          background: #ffffff80;
+          box-shadow:
+            0 7px 23px #6c86ab12,
+            inset 0 1px #fff;
+          gap: 20px;
+        }
+        .air-brand {
+          display: flex;
+          align-items: center;
+          gap: 11px;
+          font:
+            700 24px 'Trebuchet MS',
+            'Segoe UI',
+            sans-serif;
+          letter-spacing: -0.05em;
+          color: #3c5674;
+        }
+        .air-brand-mark {
+          width: 26px;
+          height: 26px;
+          border: 1px solid #ffffff;
+          border-radius: 9px;
+          background: linear-gradient(135deg, #e1f7ff, #bfbce8 50%, #c6f3e9);
+          box-shadow:
+            inset 2px 2px 5px #fff,
+            0 3px 6px #6d8fad44;
+          transform: rotate(-12deg);
+        }
+        .air-header p {
+          font-size: 12px;
+          line-height: 1.9;
+          color: #587089;
+        }
+        .air-hero {
+          text-align: center;
+          margin: 35px auto 26px;
+          position: relative;
+        }
+        .air-overline {
+          font:
+            10px 'Trebuchet MS',
+            'Segoe UI',
+            sans-serif;
+          letter-spacing: 0.23em;
+          color: #50677d;
+        }
+        .air-hero h1 {
+          font-size: 44px;
+          font-weight: 500;
+          letter-spacing: -0.055em;
+          line-height: 1.5;
+          margin: 13px 0 10px;
+        }
+        .air-hero h1 span {
+          color: #547bb1;
+        }
+        .air-hero p:not(.air-overline) {
+          font-size: 12px;
+          line-height: 1.9;
+          color: #50677d;
+        }
+        .air-model-tag {
+          display: inline-block;
+          margin-top: 17px;
+          border: 1px solid #ffffffdd;
+          border-radius: 25px;
+          background: #ffffff99;
+          box-shadow: 0 4px 12px #8c9fbb1a;
+          padding: 7px 15px;
+          font-size: 12px;
+          color: #50677d;
+        }
+        .air-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 320px;
+          gap: 24px;
+          align-items: start;
+        }
+        .air-view {
+          position: relative;
+          border: 1px solid #fff;
+          border-radius: 43px;
+          background: linear-gradient(135deg, #ffffff73, #eefaff30 38%, #f6f2ff70);
+          box-shadow:
+            0 18px 32px #788eab18,
+            inset 0 2px #fff,
+            inset -2px -2px 2px #b5c9df55;
+          min-width: 0;
+          padding: 23px 20px 20px;
+          overflow: hidden;
+        }
+        .air-view::before {
+          content: '';
+          position: absolute;
+          inset: 8px;
+          border: 1px solid #ffffff88;
+          pointer-events: none;
+          border-radius: 35px;
+        }
+        .air-stage-head {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 0 6px;
+          z-index: 1;
+        }
+        .air-stage-head h2 {
+          font-size: 16px;
+          font-weight: 500;
+        }
+        .air-stage-head p {
+          font-size: 12px;
+          line-height: 1.8;
+          color: #50677d;
+        }
+        .air-bubble {
+          width: 39px;
+          height: 39px;
+          display: grid;
+          place-items: center;
+          border-radius: 50%;
+          background: linear-gradient(145deg, #ffffffec, #e8ecfccc);
+          border: 1px solid #fff;
+          box-shadow:
+            0 5px 10px #8da1be26,
+            inset 0 1px #fff;
+          color: #5b7693;
+          font-size: 17px;
+          flex: none;
+        }
+        .air-stage > svg {
+          width: 100%;
+          height: 393px;
+          display: block;
+        }
+        .air-legend {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          font-size: 12px;
+          color: #50677d;
+          margin-top: -2px;
+          position: relative;
+        }
+        .air-toolbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 14px;
+          position: relative;
+          margin: 23px 8px 0;
+        }
+        .air-view-pill {
+          display: flex;
+          gap: 21px;
+          align-items: center;
+          padding: 12px 18px;
+          border: 1px solid #fff;
+          border-radius: 25px;
+          background: #ffffffc9;
+          box-shadow:
+            0 8px 16px #7990b02b,
+            inset 0 1px #fff;
+          font-size: 12px;
+          color: #50677d;
+        }
+        .air-view-pill strong {
+          font-weight: 500;
+          color: #345e86;
+        }
+        .air-view-pill span {
+          color: #50677d;
+        }
+        .air-zoom {
+          display: flex;
+          gap: 9px;
+        }
+        .air-zoom .air-bubble {
+          width: 37px;
+          height: 37px;
+          font-size: 18px;
+        }
+        .air-view-note {
+          text-align: center;
+          font-size: 12px;
+          color: #50677d;
+          margin-top: 16px;
+          line-height: 1.8;
+        }
+        .air-input {
+          border-radius: 29px;
+          padding: 26px 24px;
+          background: linear-gradient(150deg, #fffffff2, #f8fbffdb);
+          border: 1px solid white;
+          box-shadow:
+            0 20px 33px #718baa24,
+            inset 0 2px #fff,
+            inset -1px -1px #b9d2e83d;
+          position: relative;
+        }
+        .air-input::before {
+          content: '';
+          position: absolute;
+          top: 12px;
+          left: 18px;
+          right: 18px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #fff, transparent);
+        }
+        .air-input .air-overline {
+          font-size: 9px;
+          letter-spacing: 0.16em;
+        }
+        .air-input h2 {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 11px 0 20px;
+          letter-spacing: -0.035em;
+        }
+        .air-fields {
+          margin-top: 21px;
+        }
+        .air-field {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid #d9e3ef;
+          padding: 16px 0;
+        }
+        .air-field label {
+          font-size: 12px;
+          color: #50677d;
+        }
+        .air-field-value {
+          display: flex;
+          align-items: baseline;
+          gap: 8px;
+        }
+        .air-field b {
+          font:
+            400 32px/1 'Trebuchet MS',
+            'Segoe UI',
+            sans-serif;
+          color: #3c5876;
+          letter-spacing: -0.035em;
+          font-variant-numeric: tabular-nums;
+        }
+        .air-field small {
+          font-size: 12px;
+          color: #50677d;
+        }
+        .air-margin {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 22px;
+          gap: 13px;
+        }
+        .air-margin p {
+          font-size: 12px;
+          line-height: 1.7;
+        }
+        .air-margin small {
+          display: block;
+          color: #50677d;
+          font-size: 12px;
+          margin-top: 5px;
+        }
+        .air-margin b {
+          font:
+            400 28px 'Trebuchet MS',
+            'Segoe UI',
+            sans-serif;
+        }
+        .air-margin b small {
+          display: inline;
+          font-size: 12px;
+          margin-left: 5px;
+        }
+        .air-input-note {
+          font-size: 12px;
+          line-height: 1.85;
+          color: #50677d;
+          margin-top: 16px;
+        }
+        .air-submit {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 8px;
+          margin-top: 24px;
+          border-radius: 30px;
+          background: linear-gradient(145deg, #b8def3, #c8c8ee 56%, #bfddf1);
+          border: 1px solid #fff;
+          box-shadow:
+            0 9px 17px #6485ab2d,
+            inset 0 2px 2px #ffffffb3,
+            inset 0 -2px 2px #7793be3d;
+          padding: 15px 19px;
+          color: #2b5276;
+          font-size: 12px;
+          min-height: 54px;
+        }
+        .air-submit span {
+          font-size: 18px;
+        }
+        .air-browser-note {
+          text-align: center;
+          font-size: 12px;
+          color: #50677d;
+          line-height: 1.9;
+          margin-top: 15px;
+        }
+        .air-result {
+          margin-top: 26px;
+          border-radius: 27px;
+          border: 1px solid #fff;
+          background: #ffffffde;
+          box-shadow:
+            0 11px 22px #8598b719,
+            inset 0 2px #fff;
+          padding: 23px 29px;
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          gap: 10px 35px;
+          align-items: center;
+        }
+        .air-result .air-overline {
+          font-size: 9px;
+          color: #50677d;
+        }
+        .air-result h2 {
+          font-size: 23px;
+          font-weight: 500;
+          letter-spacing: -0.03em;
+          margin-top: 9px;
+        }
+        .air-result p {
+          font-size: 12px;
+          line-height: 1.9;
+          color: #50677d;
+          margin-top: 9px;
+        }
+        .air-result dl {
+          display: flex;
+          justify-content: space-around;
+          border-left: 1px solid #d9e3ef;
+          margin: 0;
+          padding-left: 21px;
+          gap: 25px;
+        }
+        .air-result dt {
+          font-size: 12px;
+          color: #50677d;
+        }
+        .air-result dd {
+          font-size: 24px;
+          font-weight: 500;
+          margin: 8px 0 0;
+          color: #476280;
+        }
+        .air-result dd.code {
+          font:
+            15px 'Trebuchet MS',
+            'Segoe UI',
+            sans-serif;
+          padding-top: 5px;
+        }
+        .air-result-note {
+          grid-column: 1/-1;
+          border-top: 1px solid #dde6ef;
+          margin-top: 8px;
+          padding-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          font-size: 12px;
+          color: #50677d;
+          line-height: 1.8;
+        }
+        .air-result-note span {
+          white-space: nowrap;
+          color: #4a7095;
+        }
+        .air-footer {
+          display: flex;
+          justify-content: space-between;
+          gap: 25px;
+          font-size: 12px;
+          line-height: 1.9;
+          color: #50677d;
+          padding: 23px 10px 0;
+        }
+        .fx-off .air-atmosphere {
+          display: none;
+        }
+        .fx-off .air-atmosphere::before,
+        .fx-off .air-atmosphere::after {
+          animation: none;
+        }
+        .fx-paused .air-atmosphere::before,
+        .fx-paused .air-atmosphere::after {
+          animation-play-state: paused;
+        }
+        @keyframes air-light {
+          0%,
+          100% {
+            opacity: 0.5;
+            transform: translateY(0);
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-23px);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .air-atmosphere::before,
+          .air-atmosphere::after {
+            animation: none !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .air-shell {
+            padding: 15px 14px 22px;
+          }
+          .air-header {
+            padding: 13px 16px;
+            gap: 12px;
+          }
+          .air-brand {
+            font-size: 23px;
+            gap: 8px;
+          }
+          .air-brand-mark {
+            width: 22px;
+            height: 22px;
+            border-radius: 7px;
+          }
+          .air-header p {
+            font-size: 12px;
+            text-align: right;
+            line-height: 1.8;
+          }
+          .air-hero {
+            margin: 30px 0 24px;
+          }
+          .air-overline {
+            font-size: 9px;
+          }
+          .air-hero h1 {
+            font-size: 34px;
+            line-height: 1.55;
+            margin-top: 14px;
+          }
+          .air-hero h1 span {
+            display: block;
+          }
+          .air-hero p:not(.air-overline) {
+            font-size: 10px;
+            line-height: 1.9;
+          }
+          .air-model-tag {
+            font-size: 12px;
+            margin-top: 15px;
+            padding: 7px 12px;
+          }
+          .air-layout {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .air-view {
+            border-radius: 31px;
+            padding: 20px 12px 20px;
+          }
+          .air-view::before {
+            inset: 6px;
+            border-radius: 26px;
+          }
+          .air-stage-head {
+            padding: 0 7px;
+            gap: 10px;
+          }
+          .air-stage-head h2 {
+            font-size: 15px;
+          }
+          .air-stage-head p {
+            font-size: 12px;
+          }
+          .air-stage-head .air-bubble {
+            width: 34px;
+            height: 34px;
+            font-size: 15px;
+          }
+          .air-stage > svg {
+            height: 252px;
+          }
+          .air-legend {
+            font-size: 12px;
+            gap: 13px;
+            margin-top: 0;
+          }
+          .air-toolbar {
+            margin: 21px 7px 0;
+            gap: 8px;
+          }
+          .air-view-pill {
+            padding: 11px 13px;
+            gap: 13px;
+            font-size: 12px;
+          }
+          .air-zoom {
+            gap: 7px;
+          }
+          .air-zoom .air-bubble {
+            width: 31px;
+            height: 31px;
+            font-size: 16px;
+          }
+          .air-view-note {
+            font-size: 12px;
+            margin-top: 15px;
+          }
+          .air-input {
+            padding: 25px 24px;
+            border-radius: 27px;
+          }
+          .air-input h2 {
+            font-size: 22px;
+          }
+          .air-field {
+            padding: 17px 0;
+          }
+          .air-field b {
+            font-size: 36px;
+          }
+          .air-field label {
+            font-size: 12px;
+          }
+          .air-input-note {
+            font-size: 12px;
+          }
+          .air-submit {
+            font-size: 13px;
+          }
+          .air-result {
+            display: block;
+            margin-top: 24px;
+            padding: 23px;
+          }
+          .air-result h2 {
+            font-size: 22px;
+            line-height: 1.6;
+          }
+          .air-result dl {
+            border-left: 0;
+            border-top: 1px solid #d9e3ef;
+            padding: 18px 0 0;
+            margin-top: 18px;
+            justify-content: flex-start;
+            gap: 36px;
+          }
+          .air-result dd {
+            font-size: 22px;
+          }
+          .air-result dd.code {
+            font-size: 14px;
+          }
+          .air-result-note {
+            display: block;
+            margin-top: 20px;
+            padding-top: 12px;
+            font-size: 12px;
+          }
+          .air-result-note span {
+            display: block;
+            margin-top: 10px;
+          }
+          .air-footer {
+            display: block;
+            font-size: 12px;
+            padding: 22px 7px 0;
+          }
+          .air-footer p + p {
+            margin-top: 9px;
+          }
+          .air-atmosphere::before {
+            right: -140px;
+            top: 20px;
+          }
+          .air-atmosphere::after {
+            left: -160px;
+            top: 390px;
+          }
+        }
+      `;
+      function devicePage() {
+        return `<header class="device-header"><div class="device-brand"><span class="device-brand-mark"></span>${dotText('CARRYCHECK')}</div><p>PACKED OBJECT / ROUTE STUDY<br>住宅モデル準備中 · 開発版</p></header><main class="device-main"><section class="device-hero"><div class="device-word">${dotText('MOVE.IN')}</div><div class="device-hero-copy"><h1>その寸法を、動きに変える。</h1><p>梱包サイズと空間の関係を、ひとつの計測器で。<br>メゾネット賃貸の玄関 → 階段 → 部屋。必要な回転・傾斜は今後計算側で探索します。</p></div></section><div class="device-shell"><div class="device-sheen" aria-hidden="true"></div><i class="device-screw tl" aria-hidden="true"></i><i class="device-screw tr" aria-hidden="true"></i><i class="device-screw bl" aria-hidden="true"></i><i class="device-screw br" aria-hidden="true"></i><div class="device-grid"><section class="device-inputs"><p class="device-eyebrow">01 / PACKAGE INPUT</p><h2>梱包サイズを入力</h2><div class="device-fields"><div class="device-field"><label>幅 W<small>mm</small></label>${dotText('1,200')}</div><div class="device-field"><label>奥行 D<small>mm</small></label>${dotText('400')}</div><div class="device-field"><label>高さ H<small>mm</small></label>${dotText('400')}</div></div><div class="device-margin"><p>安全マージン<small>箱の各面に加える余裕</small></p><div class="device-margin-value">${dotText('10')}<span>mm / 各面</span></div></div><p class="device-hint">梱包材を含む外寸。<br>幅・奥行・高さにそれぞれ20 mmを追加。</p><div class="device-submit"><span class="device-knob">↗</span><strong>入力と準備状況<br>を確認</strong></div><p class="device-hint">住宅モデル準備中 / 搬入可否は未判定です</p></section><section class="device-workspace"><div class="device-stage-head"><div><h2>荷物の大きさを見る</h2><p>梱包箱と安全マージン / 住宅モデル準備中</p></div><span class="device-mode">BOX</span></div><div class="device-stage">${deviceSpace}</div><div class="device-legend"><span>梱包箱</span><span>破線：安全マージン</span></div><div class="device-tools"><span><strong>斜め</strong>　正面　上から</span><span>−　＋　視点リセット</span></div></section></div><section class="device-result"><div class="device-result-title"><p class="device-eyebrow">02 / STATUS</p><h2>住宅モデルは準備中です</h2><p>住宅・階段のモデルと経路探索は未実装です。現在は入力と箱の表示を確認できます。</p></div><dl><div><dt>最小すき間</dt><dd>未測定</dd></div><div><dt>モデル版</dt><dd class="code">準備中</dd></div></dl></section></div><footer class="device-footer"><p><strong>すき間・注意箇所は未評価です。</strong>実際の住宅の搬入可否を示すものではありません。<br>比較用の模式図 / 住宅・階段モデルは未実装。想定操作：箱の視点変更（この資料では操作不可）。</p><p>固定経路：玄関 → 階段 → 部屋<br>装飾は筐体の反射のみ / 箱は静止</p></footer></main>`;
+      }
+      function airPage() {
+        return `<div class="air-shell"><div class="air-atmosphere" aria-hidden="true"></div><header class="air-header"><div class="air-brand"><span class="air-brand-mark"></span>CarryCheck</div><p>住宅モデル準備中 · 開発版<br>このモデルについて</p></header><main><section class="air-hero"><p class="air-overline">A CLEARER WAY TO MOVE</p><h1>空間を、<span>見通す。</span></h1><p>梱包外寸と、各面の安全マージンを入力。<br>メゾネット賃貸の玄関 → 階段 → 部屋へ。</p><span class="air-model-tag">固定の搬入方向 / 住宅モデル準備中</span></section><div class="air-layout"><section class="air-view"><div class="air-stage-head"><div><h2>荷物の大きさを見る</h2><p>梱包箱と安全マージン / 住宅モデル準備中</p></div><span class="air-bubble">↗</span></div><div class="air-stage">${airSpace}</div><div class="air-legend"><span>梱包箱</span><span>破線：安全マージン</span></div><div class="air-toolbar"><div class="air-view-pill"><strong>斜め</strong><span>正面</span><span>上から</span></div><div class="air-zoom"><span class="air-bubble">−</span><span class="air-bubble">＋</span><span class="air-bubble">↺</span></div></div><p class="air-view-note">想定操作：箱の視点変更（この資料では操作不可）</p></section><section class="air-input"><p class="air-overline">01 / PACKAGE</p><h2>梱包サイズを入力</h2><div class="air-fields"><div class="air-field"><label>幅 W</label><div class="air-field-value"><b>1,200</b><small>mm</small></div></div><div class="air-field"><label>奥行 D</label><div class="air-field-value"><b>400</b><small>mm</small></div></div><div class="air-field"><label>高さ H</label><div class="air-field-value"><b>400</b><small>mm</small></div></div></div><div class="air-margin"><p>安全マージン<small>箱の各面に加える余裕</small></p><b>10<small>mm / 各面</small></b></div><p class="air-input-note">梱包材を含む外寸。幅・奥行・高さにそれぞれ20 mmを加えた大きさとして扱います。</p><div class="air-submit">入力と準備状況を確認<span>→</span></div><p class="air-browser-note">住宅モデル準備中 / 搬入可否は未判定です</p></section></div><section class="air-result"><div><p class="air-overline">02 / STATUS</p><h2>住宅モデルは準備中です</h2><p>住宅・階段のモデルと経路探索は未実装です。現在は入力と箱の表示を確認できます。</p></div><dl><div><dt>最小すき間</dt><dd>未測定</dd></div><div><dt>モデル版</dt><dd class="code">準備中</dd></div></dl><div class="air-result-note">すき間・注意箇所は未評価です。実際の住宅の搬入可否を示すものではありません。<span>固定経路：玄関 → 階段 → 部屋</span></div></section></main><footer class="air-footer"><p>比較用の模式図 / 住宅・階段モデルは未実装です。</p><p>背景の光のみがゆっくり変化します / 箱・操作は静止</p></footer></div>`;
+      }
+      function page(id) {
+        const concepts = {
+          b: { styles: popStyles, content: popPage },
+          d: { styles: deviceStyles, content: devicePage },
+          e: { styles: airStyles, content: airPage },
+        };
+        const selected = concepts[id];
+        return `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${selected.styles}</style></head><body>${selected.content()}</body></html>`;
+      }
+      const viewport = document.getElementById('viewport');
+      const concept = document.getElementById('concept');
+      const effects = document.getElementById('effects');
+      const effectNote = document.getElementById('effect-note');
+      const comparison = document.getElementById('comparison');
+      const articles = [...document.querySelectorAll('article')];
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      const visibleFrames = new WeakSet();
+      function updateEffects() {
+        for (const article of articles) {
+          const iframe = article.querySelector('iframe');
+          const body = iframe.contentDocument?.body;
+          if (!body) continue;
+          body.classList.toggle('fx-off', !effects.checked);
+          body.classList.toggle(
+            'fx-paused',
+            document.hidden || article.hidden || !visibleFrames.has(iframe),
+          );
+        }
+        effectNote.textContent = !effects.checked
+          ? '装飾エフェクトはOFFです。比較画面の箱と準備状況は静止しています。'
+          : reducedMotion.matches
+            ? 'OSの「動きを減らす」設定により、装飾は静止表示です。箱と準備状況も動きません。'
+            : '装飾エフェクトはONです。Bの印刷レイヤー、Dの金属の反射、Eの背景光のみが動きます。箱と準備状況は動きません。OSの「動きを減らす」設定を優先します。';
+      }
+      function sizeFrames() {
+        const mobile = viewport.value === 'mobile';
+        for (const article of articles) {
+          if (article.hidden) continue;
+          const frame = article.querySelector('.frame');
+          const iframe = article.querySelector('iframe');
+          frame.classList.toggle('mobile', mobile);
+          const width = mobile ? 375 : 1280;
+          iframe.style.width = width + 'px';
+          iframe.style.height = '2200px';
+          const contentHeight = Math.ceil(
+            iframe.contentDocument?.body?.getBoundingClientRect().height ||
+              (mobile ? 1900 : 1100),
+          );
+          const scale = (frame.clientWidth - 2) / width;
+          iframe.style.height = contentHeight + 'px';
+          iframe.style.transform = `scale(${scale})`;
+          frame.style.height = contentHeight * scale + 2 + 'px';
+          iframe.title =
+            article.dataset.concept.toUpperCase() +
+            '案の' +
+            (mobile ? 'スマートフォン' : 'PC') +
+            '比較画面';
+        }
+      }
+      for (const article of articles) {
+        const iframe = article.querySelector('iframe');
+        iframe.addEventListener('load', () => {
+          sizeFrames();
+          updateEffects();
+          iframe.contentDocument?.fonts.ready.then(sizeFrames);
+        });
+        iframe.srcdoc = page(article.dataset.concept);
+      }
+      viewport.addEventListener('change', sizeFrames);
+      function showConcept() {
+        comparison.classList.toggle('single', concept.value !== 'all');
+        for (const article of articles)
+          article.hidden =
+            concept.value !== 'all' &&
+            article.dataset.concept !== concept.value;
+        sizeFrames();
+        updateEffects();
+      }
+      concept.addEventListener('change', showConcept);
+      for (const button of document.querySelectorAll('[data-expand]')) {
+        button.addEventListener('click', () => {
+          concept.value = button.dataset.expand;
+          showConcept();
+          comparison.scrollIntoView({ block: 'start' });
+          concept.focus({ preventScroll: true });
+        });
+      }
+      effects.addEventListener('change', updateEffects);
+      reducedMotion.addEventListener('change', updateEffects);
+      document.addEventListener('visibilitychange', updateEffects);
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visibleFrames.add(entry.target);
+          else visibleFrames.delete(entry.target);
+        }
+        updateEffects();
+      });
+      for (const article of articles)
+        visibilityObserver.observe(article.querySelector('iframe'));
+      new ResizeObserver(sizeFrames).observe(comparison);
+    </script>
+  </body>
+</html>

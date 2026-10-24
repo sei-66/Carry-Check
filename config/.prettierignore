@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+cache/
+package-lock.json
+AGENTS.md
+references/
+.codex/
+.claude/
+*.local.*

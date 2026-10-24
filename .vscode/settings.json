@@ -1,0 +1,7 @@
+{
+  "eslint.workingDirectories": ["."],
+  "eslint.options": {
+    "overrideConfigFile": "config/eslint.config.js"
+  },
+  "prettier.ignorePath": "config/.prettierignore"
+}

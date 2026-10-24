@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": [],
+    "tsBuildInfoFile": "../cache/tsconfig.core.tsbuildinfo"
+  },
+  "include": [
+    "../src/domain/**/*.ts",
+    "../src/geometry/**/*.ts",
+    "../src/model/**/*.ts",
+    "../src/planner/**/*.ts",
+    "../src/application/**/*.ts",
+    "../src/shared/**/*.ts"
+  ]
+}

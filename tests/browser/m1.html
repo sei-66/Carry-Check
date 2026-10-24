@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarryCheck M1 Worker 計測</title>
+    <style>
+      body {
+        margin: 1rem;
+        font-family: system-ui, sans-serif;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      button {
+        padding: 0.5rem 0.75rem;
+        margin: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>M1 Worker 計測</h1>
+    <p>
+      固定された回り段fixtureをWorkerで実行します。住宅全体、LDK入口、経路可否の判定は含みません。
+      初期化遅延・計算保持はライフサイクル検査専用で、性能サンプルから除外します。
+      起動・初期化・計算・Worker寿命の4種の短期限で強制終了と新Workerでの再実行を検査します。
+      通常の期限（20/30/15/70秒）で長時間待機した検査とは区別して記録します。
+      検査の成功はエンジンの住宅向け採用完了を示しません。微小すき間の不一致はprecisionProbeで確認します。
+    </p>
+    <p id="verification-status" role="status">開始しています</p>
+    <button id="cancel-verification" type="button" disabled>実行中止</button>
+    <button id="rerun-verification" type="button" disabled>再実行</button>
+    <button id="download-verification" type="button" disabled>
+      JSONダウンロード
+    </button>
+    <pre id="verification-output">準備中</pre>
+    <script type="module" src="/src/dev/m1-verification.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy_pages:
+        description: 検査成功後に GitHub Pages へ配信する（main のみ）
+        type: boolean
+        default: false
+  schedule:
+    - cron: '23 22 * * 0' # 月曜 07:23 JST。依存・履歴を定期的に再検査する。
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  # 配信途中の main は中断せず、PR の古い検査だけを中断する。
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: 開発依存を含む脆弱性検査
+        run: npm audit --audit-level=high
+      - run: npm run check
+      - name: GitHub Pages 用のサブパスでビルド
+        env:
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
+        run: npm run build -- --base="/$REPOSITORY_NAME/"
+      - name: Pages 配信物の構成を検査
+        run: |
+          test -s dist/index.html
+          test -s dist/LICENSE.md
+          test -s dist/THIRD_PARTY_LICENSES.md
+          unexpected="$(find dist -mindepth 1 ! -type d \
+            \( ! -type f -o \( ! -path 'dist/index.html' \
+            ! -path 'dist/LICENSE.md' ! -path 'dist/THIRD_PARTY_LICENSES.md' \
+            ! -path 'dist/assets/*.js' ! -path 'dist/assets/*.css' \) \) -print)"
+          if [ -n "$unexpected" ]; then
+            printf 'Unexpected Pages files:\n%s\n' "$unexpected"
+            exit 1
+          fi
+      - name: 検査済み Pages ビルドを保存
+        if: >-
+          vars.PAGES_ENABLED == 'true' && github.ref == 'refs/heads/main' &&
+          (github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && inputs.deploy_pages))
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+          retention-days: 1
+
+  workflows:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: GitHub Actions の構文・式・シェルを検査
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        run: |
+          archive="$RUNNER_TEMP/actionlint.tar.gz"
+          curl --fail --location --silent --show-error --retry 3 \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" \
+            --output "$archive"
+          printf '%s  %s\n' "$ACTIONLINT_SHA256" "$archive" | sha256sum --check
+          tar -xzf "$archive" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" -color
+
+  secrets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Git 履歴のシークレット検査
+        env:
+          GITLEAKS_VERSION: 8.30.1
+          GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+        run: |
+          archive="$RUNNER_TEMP/gitleaks.tar.gz"
+          curl --fail --location --silent --show-error --retry 3 \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            --output "$archive"
+          printf '%s  %s\n' "$GITLEAKS_SHA256" "$archive" | sha256sum --check
+          tar -xzf "$archive" -C "$RUNNER_TEMP" gitleaks
+
+          set +e
+          printf 'token = "ghp_%s"\n' "$(openssl rand -hex 18)" | "$RUNNER_TEMP/gitleaks" stdin --redact --no-banner
+          probe_status=$?
+          set -e
+          if [ "$probe_status" -ne 1 ]; then
+            echo 'gitleaks failed to detect the probe token'
+            exit 1
+          fi
+
+          "$RUNNER_TEMP/gitleaks" git --redact --log-opts="--all HEAD" .
+
+  deploy:
+    if: >-
+      vars.PAGES_ENABLED == 'true' && github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && inputs.deploy_pages))
+    needs: [check, workflows, secrets]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: GitHub Pages の設定を確認
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: 同じ実行の成果物を GitHub Pages へ配信
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

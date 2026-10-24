@@ -1,0 +1,59 @@
+# Node.js / Vite / TypeScript
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test output
+coverage/
+
+# Environments
+.env
+.env.*
+!.env.example
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+!/.vscode/
+/.vscode/*
+!/.vscode/settings.json
+.idea/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.egg-info
+
+# Temporary output and local audit records
+cache/*
+temp/
+
+# Settings
+*.local.json
+*.local.md
+
+# Local Windows launcher
+/scripts/start-local.bat
+
+# Local AI agent / MCP state
+/.claude/
+/.codex/
+.mcp.json
+
+# References
+/references/floorplan
+/references/photos

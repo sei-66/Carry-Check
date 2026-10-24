@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarryCheck 性能計測</title>
+    <style>
+      body {
+        font: 16px/1.6 system-ui;
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      button {
+        padding: 12px;
+        margin: 4px;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        background: #f1f2f3;
+        padding: 16px;
+      }
+      iframe {
+        width: 100%;
+        height: 720px;
+      }
+      #performance-viewer {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>性能計測（製品と同じWorker・3D実装）</h1>
+    <p>
+      本番ビルドで実行してください。通信速度・CPU制限は設定しません。初回試料と後続5回を分け、各回新Workerを生成します。後続もモデルの初期化を含みます。暖機後はブラウザの資材キャッシュを利用する条件で、Worker自体は再利用しません。
+    </p>
+    <button id="measure-load" type="button">製品の読み込みを測定</button>
+    <button id="measure-runtime" type="button">計算・描画を測定</button>
+    <button id="measure-offscreen" type="button">
+      画面外の3D読み込みを測定
+    </button>
+    <button id="measure-updates" type="button">計算中の不要描画を測定</button>
+    <button id="measure-furniture" type="button">
+      家具・家電12サイズを計算
+    </button>
+    <p>
+      12サイズは各1回、順番に新Workerで計算します。家電の梱包分は仮定です。
+      計算終了と経路確認の件数を区別し、失敗しても後続サイズを続行します。
+    </p>
+    <pre id="performance-output" role="status">未実行</pre>
+    <div id="performance-viewer"></div>
+    <div id="product-frame"></div>
+    <script type="module" src="/src/dev/performance-verification.ts"></script>
+  </body>
+</html>
