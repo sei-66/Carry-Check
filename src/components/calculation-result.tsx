@@ -9,7 +9,6 @@ import {
   Square,
   TriangleAlert,
 } from 'lucide-react';
-import type { Ref } from 'react';
 import type { CalculationState } from '@/application/calculation-client';
 import type { PathNotFoundResult } from '@/shared/calculation-messages';
 import { Button } from './ui/button';
@@ -57,14 +56,12 @@ const reasons: Record<PathNotFoundResult['reason'], string> = {
 export function CalculationResult({
   state,
   elapsedMs,
-  resultRef,
   onRetry,
   onCancel,
   onEdit,
 }: {
   readonly state: CalculationState;
   readonly elapsedMs: number;
-  readonly resultRef: Ref<HTMLElement>;
   readonly onRetry: () => void;
   readonly onCancel: () => void;
   readonly onEdit: () => void;
@@ -123,8 +120,6 @@ export function CalculationResult({
       </p>
       <section
         id="calculation-result"
-        ref={resultRef}
-        tabIndex={-1}
         className={`result-panel ${found ? 'result-found' : ''} ${issue ? 'result-issue' : ''}`}
         aria-labelledby="result-heading"
         aria-busy={busy}
@@ -259,7 +254,7 @@ export function CalculationResult({
         {found && (
           <>
             <p className="result-description">
-              この仮定モデルと入力条件で、玄関外からLDK入口を箱全体が越えるまでの連続した移動を確認しました。LDK内の移動・設置は評価していません。
+              この仮定モデルと入力条件で、玄関外からLDK入口を箱全体が越えるまでの連続した移動を確認しました。
             </p>
             <div className="result-metrics">
               <div>
@@ -282,23 +277,12 @@ export function CalculationResult({
                 </strong>
               </div>
             </div>
-            <p className="clearance-note">
-              <CircleHelp size={15} aria-hidden="true" />
-              <span>
-                {result.clearance === null
-                  ? '経路全体のすき間評価は計算上限内に完了しませんでした。未評価を0\u00a0mmや安全とは扱いません。'
-                  : '梱包箱表面から、床・段・枠・壁などの物理形状までの経路全体の距離区間です。人工境界や持上げ制約を除き、住宅寸法の誤差は含みません。'}{' '}
-                {result.clearance === null
-                  ? 'すき間の代表位置も未評価です。'
-                  : '3Dの「すき間の代表位置を見る」で、評価に使った代表姿勢を確認できます。厳密な最小位置の特定ではありません。'}
-              </span>
-            </p>
-            {result.clearance && (
+            {result.clearance === null && (
               <p className="clearance-note">
-                {result.clearance.attention.obstacleId &&
-                physicalLabels.has(result.clearance.attention.obstacleId)
-                  ? `代表位置の近接形状：${physicalLabels.get(result.clearance.attention.obstacleId) ?? ''}`
-                  : '近接形状の特定は未完了'}
+                <CircleHelp size={15} aria-hidden="true" />
+                <span>
+                  経路全体のすき間評価は計算上限内に完了しませんでした。未評価を0&nbsp;mmや安全とは扱いません。
+                </span>
               </p>
             )}
             {result.clearance?.obstacleId && (

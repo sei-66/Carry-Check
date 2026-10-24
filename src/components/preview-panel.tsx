@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState, type Ref } from 'react';
 import {
   ArrowDownToLine,
   Box,
@@ -8,7 +8,6 @@ import {
   Plus,
   Play,
   Pause,
-  MapPin,
   RotateCcw,
 } from 'lucide-react';
 import type { ColorTheme, DesignTheme } from '@/shared/appearance';
@@ -21,12 +20,14 @@ import type {
 import { Button } from './ui/button';
 
 interface Props {
+  readonly previewRef: Ref<HTMLElement>;
   readonly content: ViewerContent;
   readonly theme: ColorTheme;
   readonly design: DesignTheme;
 }
 
 export const PreviewPanel = memo(function PreviewPanel({
+  previewRef,
   content,
   theme,
   design,
@@ -41,12 +42,16 @@ export const PreviewPanel = memo(function PreviewPanel({
   const [playback, setPlayback] = useState<PlaybackState>({
     playing: false,
     progress: 0,
-    atAttention: false,
   });
   const [reducedMotion, setReducedMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
   const hasPath = !!content.path;
+  const playbackAction = playback.playing
+    ? '再生を停止'
+    : playback.progress >= 1
+      ? '初めから再生'
+      : '経路を再生';
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => setReducedMotion(preference.matches);
@@ -115,7 +120,12 @@ export const PreviewPanel = memo(function PreviewPanel({
     viewer.current?.setView('perspective');
   }
   return (
-    <section className="preview-panel" aria-labelledby="preview-heading">
+    <section
+      ref={previewRef}
+      tabIndex={-1}
+      className="preview-panel"
+      aria-labelledby="preview-heading"
+    >
       <div className="preview-heading">
         <div>
           <p className="eyebrow">ROUTE / 3D VIEW</p>
@@ -138,7 +148,6 @@ export const PreviewPanel = memo(function PreviewPanel({
           id="viewer"
           className="viewer-canvas"
           aria-label="仮定住宅と梱包箱・確認した経路の3D表示"
-          aria-describedby="controls-help"
         />
         {status === 'loading' && (
           <div className="viewer-message" role="status">
@@ -178,6 +187,8 @@ export const PreviewPanel = memo(function PreviewPanel({
             <button
               type="button"
               className="playback-button"
+              aria-label={playbackAction}
+              title={playbackAction}
               disabled={status !== 'ready' || reducedMotion}
               onClick={() => viewer.current?.setPlaying(!playback.playing)}
             >
@@ -186,61 +197,33 @@ export const PreviewPanel = memo(function PreviewPanel({
               ) : (
                 <Play size={16} aria-hidden="true" />
               )}
-              {playback.playing
-                ? '再生を停止'
-                : playback.progress >= 1
-                  ? '初めから再生'
-                  : '経路を再生'}
             </button>
+            <label className="sr-only" htmlFor="route-position">
+              経路上の表示位置
+            </label>
+            <input
+              id="route-position"
+              type="range"
+              min="0"
+              max="1000"
+              step="1"
+              value={Math.round(playback.progress * 1000)}
+              disabled={status !== 'ready'}
+              aria-valuetext={`${Math.round(playback.progress * 100)}パーセント`}
+              onChange={(event) =>
+                viewer.current?.setPlaybackPosition(
+                  Number(event.target.value) / 1000,
+                )
+              }
+            />
             <output htmlFor="route-position">
               {Math.round(playback.progress * 100)}%
             </output>
           </div>
-          <label className="sr-only" htmlFor="route-position">
-            経路上の表示位置
-          </label>
-          <input
-            id="route-position"
-            type="range"
-            min="0"
-            max="1000"
-            step="1"
-            value={Math.round(playback.progress * 1000)}
-            disabled={status !== 'ready'}
-            aria-valuetext={`${Math.round(playback.progress * 100)}パーセント`}
-            onChange={(event) =>
-              viewer.current?.setPlaybackPosition(
-                Number(event.target.value) / 1000,
-              )
-            }
-          />
           <p>
             {reducedMotion
               ? '動きを減らす設定のため再生は停止しています。スライダーで姿勢を確認できます。'
-              : 'スライダーで止めて姿勢を確認できます。再生速度は作業時間を表しません。'}
-          </p>
-          {content.path?.clearance && (
-            <div className="attention-control">
-              <button
-                type="button"
-                className="playback-button"
-                disabled={status !== 'ready'}
-                onClick={() => viewer.current?.showClearanceAttention()}
-              >
-                <MapPin size={16} aria-hidden="true" />
-                <span>
-                  すき間の
-                  <wbr />
-                  代表位置を見る
-                </span>
-              </button>
-              <p>
-                すき間評価で得た代表姿勢です。厳密な最小位置や現物の安全性を示すものではありません。
-              </p>
-            </div>
-          )}
-          <p className="attention-status" role="status" aria-live="polite">
-            {playback.atAttention ? 'すき間の代表位置で停止しています。' : ''}
+              : 'スライダーで止めて姿勢を確認できます。'}
           </p>
         </div>
       )}
@@ -295,9 +278,6 @@ export const PreviewPanel = memo(function PreviewPanel({
           </button>
         </div>
       </div>
-      <p id="controls-help" className="controls-help">
-        ドラッグで回転、ホイール・ピンチで拡縮できます。ページのスクロールは3D表示の外で行えます。視点ボタンでも操作できます。
-      </p>
       <div className="viewer-legend" aria-label="3D表示の凡例">
         <span>
           <i className="legend-box" />

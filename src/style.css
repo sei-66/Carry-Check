@@ -391,7 +391,7 @@
   color: var(--muted-foreground);
 }
 .input-panel form {
-  padding: 0 24px;
+  padding: 0 24px 24px;
 }
 .package-figure {
   text-align: center;
@@ -566,12 +566,6 @@
 .cancel-button:hover {
   background: var(--warning-background);
 }
-.calculation-caption {
-  text-align: center;
-  margin: 10px 0 24px;
-  color: var(--muted-foreground);
-  font-size: 0.62rem;
-}
 .current-model {
   border-top: 1px solid var(--border);
   background: var(--muted);
@@ -589,12 +583,6 @@
   margin-top: 7px;
   font-size: 0.83rem;
 }
-.current-model > p {
-  font-size: 0.7rem;
-  line-height: 1.8;
-  color: var(--muted-foreground);
-  margin-top: 5px;
-}
 .visual-column {
   min-width: 0;
   display: flex;
@@ -603,6 +591,7 @@
 }
 .preview-panel {
   overflow: clip;
+  scroll-margin-block: 20px;
 }
 .preview-heading {
   display: flex;
@@ -664,8 +653,7 @@
   font-weight: 600;
 }
 .viewer-caption strong,
-.current-model strong,
-.playback-button > span {
+.current-model strong {
   word-break: keep-all;
 }
 .viewer-caption div > span {
@@ -716,7 +704,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 22px 0;
+  padding: 16px 22px;
   flex-wrap: wrap;
 }
 .view-presets,
@@ -769,12 +757,6 @@
 }
 .interaction-button {
   color: var(--primary);
-}
-.controls-help {
-  font-size: 0.63rem;
-  line-height: 1.8;
-  color: var(--muted-foreground);
-  padding: 0 25px 17px;
 }
 .viewer-legend {
   display: flex;
@@ -1110,9 +1092,6 @@
   .package-diagram {
     height: 112px;
   }
-  .calculation-caption {
-    margin-bottom: 17px;
-  }
   .viewer-canvas {
     height: 380px;
   }
@@ -1213,13 +1192,6 @@
     padding-bottom: 12px;
     border-top: 1px solid var(--border);
   }
-  .current-model > p {
-    font-size: 0.73rem;
-  }
-  .calculation-caption {
-    font-size: 0.64rem;
-    margin-block: 11px 22px;
-  }
   .preview-heading {
     padding: 18px 20px;
   }
@@ -1249,10 +1221,6 @@
   }
   .interaction-button {
     font-size: 0.67rem;
-  }
-  .controls-help {
-    padding-inline: 17px;
-    font-size: 0.65rem;
   }
   .viewer-legend {
     gap: 8px 18px;
@@ -1772,7 +1740,6 @@
   background-image: radial-gradient(var(--border) 0.55px, transparent 0.55px);
   background-size: 8px 8px;
 }
-:root[data-design='pop'] .current-model > p,
 :root[data-design='pop'] .current-model > strong,
 :root[data-design='pop'] .current-model > span,
 :root[data-design='pop'] .current-model > div,
@@ -2000,13 +1967,10 @@
 .package-figure > span,
 .input-with-unit > span,
 .margin-explanation p,
-.calculation-caption,
-.current-model > p,
 .viewer-caption strong,
 .viewer-caption div > span,
 .view-presets button,
 .interaction-button,
-.controls-help,
 .viewer-legend > span,
 .result-action,
 .elapsed-time small,
@@ -2090,26 +2054,27 @@
   line-height: 1.6;
 }
 .playback-panel {
-  margin: 10px 24px 16px;
+  margin: 10px 24px 0;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px 14px;
   background: var(--secondary);
 }
 .playback-topline {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 4ch;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 .playback-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 44px;
   min-height: 44px;
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 7px 12px;
+  padding: 0;
   color: var(--foreground);
   background: var(--card);
   font-size: 0.75rem;
@@ -2117,34 +2082,21 @@
 .playback-topline output {
   font-variant-numeric: tabular-nums;
   font-size: 0.8rem;
+  text-align: right;
 }
 .playback-panel input[type='range'] {
   display: block;
   width: 100%;
+  min-width: 0;
   min-height: 44px;
-  margin: 6px 0 0;
+  margin: 0;
   accent-color: var(--route-color);
 }
 .playback-panel p {
+  margin-top: 6px;
   font-size: 0.75rem;
   line-height: 1.7;
   color: var(--muted-foreground);
-}
-.attention-control {
-  display: grid;
-  gap: 8px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-.attention-control .playback-button {
-  justify-self: start;
-  text-align: left;
-}
-.playback-panel .attention-status {
-  margin-top: 8px;
-  font-weight: 600;
-  color: var(--foreground);
 }
 .legend-route {
   height: 0 !important;
