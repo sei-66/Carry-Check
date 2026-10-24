@@ -162,18 +162,10 @@ export function DimensionsForm({
             </span>
           </Button>
         )}
-        <p className="calculation-caption">
-          仮定住宅の中で、回転・傾斜を含む経路を探索します
-        </p>
       </form>
       <div className="current-model">
         <div className="eyebrow">メゾネット賃貸の固定経路</div>
         <strong>玄関 →&nbsp;階段 →&nbsp;2階廊下 →&nbsp;LDK入口</strong>
-        <p>
-          一方向の搬入を対象にします。住宅寸法は仮定を含みます。
-          <br />
-          経路と動きの選択は不要です。
-        </p>
       </div>
     </section>
   );

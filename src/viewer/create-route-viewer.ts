@@ -30,7 +30,6 @@ export interface ViewerContent {
 export interface PlaybackState {
   readonly playing: boolean;
   readonly progress: number;
-  readonly atAttention: boolean;
 }
 export type ViewPreset = 'perspective' | 'front' | 'top';
 
@@ -231,7 +230,6 @@ export function createRouteViewer(
     let visible = true;
     let playing = false;
     let progress = 0;
-    let atAttention = false;
     let previousFrameTime = 0;
     let lastNotification = 0;
     let weights: readonly number[] = [];
@@ -239,8 +237,7 @@ export function createRouteViewer(
     const motionPreference = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     );
-    const notifyPlayback = () =>
-      onPlayback?.({ playing, progress, atAttention });
+    const notifyPlayback = () => onPlayback?.({ playing, progress });
     function applyPose() {
       const poses = content?.path?.poses;
       if (!poses?.length) return;
@@ -268,7 +265,6 @@ export function createRouteViewer(
       );
     }
     function setPlaying(next: boolean) {
-      if (next) atAttention = false;
       playing =
         next &&
         !!content?.path &&
@@ -382,7 +378,6 @@ export function createRouteViewer(
       if (pathChanged) {
         playing = false;
         progress = 0;
-        atAttention = false;
         previousFrameTime = 0;
         totalWeight = 0;
         const nextWeights: number[] = [];
@@ -524,36 +519,8 @@ export function createRouteViewer(
       setPlaybackPosition(value: number) {
         if (!Number.isFinite(value)) return;
         playing = false;
-        atAttention = false;
         progress = Math.max(0, Math.min(1, value));
         applyPose();
-        notifyPlayback();
-        render();
-      },
-      showClearanceAttention() {
-        const attention = content?.path?.clearance?.attention;
-        if (!attention) return;
-        const from = weights[attention.segmentIndex];
-        const to = weights[attention.segmentIndex + 1];
-        if (from === undefined || to === undefined) return;
-        playing = false;
-        previousFrameTime = 0;
-        progress =
-          totalWeight > 0
-            ? Math.max(
-                0,
-                Math.min(
-                  1,
-                  (from + (to - from) * attention.fraction) / totalWeight,
-                ),
-              )
-            : 0;
-        // The slider uses playback weights; display the actual evaluated sample
-        // without rounding its segment fraction through the slider's 0.1% step.
-        const { position, rotation } = attention.pose;
-        item.position.set(position.x, position.y, position.z);
-        item.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
-        atAttention = true;
         notifyPlayback();
         render();
       },

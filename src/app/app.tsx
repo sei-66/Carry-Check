@@ -35,8 +35,8 @@ export function App() {
     Partial<Record<DimensionField, boolean>>
   >({});
   const [edited, setEdited] = useState(false);
-  const resultRef = useRef<HTMLElement>(null);
-  const shouldFocusResult = useRef(false);
+  const previewRef = useRef<HTMLElement>(null);
+  const shouldFocusPreview = useRef(false);
   const pendingInvalidField = useRef<string | undefined>(undefined);
   const calculation = useCalculation();
   const appearance = useAppearance();
@@ -67,19 +67,19 @@ export function App() {
   }, [touched]);
   useEffect(() => {
     if (
-      shouldFocusResult.current &&
+      shouldFocusPreview.current &&
       ['result', 'failed', 'cancelled'].includes(calculation.state.status)
     ) {
-      shouldFocusResult.current = false;
-      resultRef.current?.focus({ preventScroll: true });
-      resultRef.current?.scrollIntoView({
+      shouldFocusPreview.current = false;
+      previewRef.current?.focus({ preventScroll: true });
+      previewRef.current?.scrollIntoView({
         behavior: 'instant',
-        block: 'nearest',
+        block: 'start',
       });
     }
   }, [calculation.state.status]);
   function changeInput(field: DimensionField, value: string) {
-    shouldFocusResult.current = false;
+    shouldFocusPreview.current = false;
     calculation.invalidate();
     setRaw((previous) => ({ ...previous, [field]: value }));
     setEdited(true);
@@ -95,7 +95,7 @@ export function App() {
       pendingInvalidField.current = Object.keys(validation.errors)[0];
       return;
     }
-    shouldFocusResult.current = true;
+    shouldFocusPreview.current = true;
     setEdited(false);
     calculation.calculate(validation.value.snapshot);
   }
@@ -209,6 +209,7 @@ export function App() {
           />
           <div className="visual-column">
             <PreviewPanel
+              previewRef={previewRef}
               content={viewerContent}
               theme={appearance.theme}
               design={appearance.design}
@@ -222,7 +223,6 @@ export function App() {
               <CalculationResult
                 state={calculation.state}
                 elapsedMs={calculation.elapsedMs}
-                resultRef={resultRef}
                 onRetry={calculate}
                 onCancel={calculation.cancel}
                 onEdit={() => document.getElementById('widthMm')?.focus()}
@@ -254,7 +254,7 @@ export function App() {
               <Box size={22} strokeWidth={1.5} aria-hidden="true" />
               <h3>LDK入口を、箱全体が通るまで</h3>
               <p>
-                階段を上がって2階で右折し、直線廊下を進んでLDK入口へ向かいます。必要な回転・傾斜を計算側で探索します。LDK内の移動・設置は評価しません。
+                階段を上がって2階で右折し、直線廊下を進んでLDK入口へ向かいます。必要な回転・傾斜を計算側で探索します。
               </p>
             </article>
             <article>
