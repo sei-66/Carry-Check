@@ -169,7 +169,7 @@ Markdown は末尾2スペースによる改行を保持し、コードの整形�
 
 依存の宣言値は `package.json`、解決済みの版は `package-lock.json` を正本とします。TypeScriptはtypescript-eslintのpeer範囲（6.1未満）に合わせて6.0.3、Node型は実行環境に合わせ24系を使用します。
 
-`@vitejs/plugin-react` 6.1.2は任意peerのBabel 7/8解決が競合したため、Vite 8と互換な6.1.1を維持しています。`--force` や `--legacy-peer-deps`、使用しないBabelパッケージの追加で回避しません。解決条件が改善した時点で再確認します。
+`@vitejs/plugin-react` は Vite 8と互換な6.1.2を使用し、ロックファイルに基づく `npm ci` で依存を復元します。React Compilerは使用せず、未使用の任意peerは追加しません。依存更新時は `npm ci` と `npm run check` で互換性を確認し、peerの競合を `--force` や `--legacy-peer-deps` で回避しません。
 
 `package.json` の `overrides.ip-address` は、開発依存の許容範囲内で[修正版10.7.4以降](https://github.com/advisories/GHSA-rxp7-6hxx-x8q5)を選ぶ下限です。依存元が修正下限を採用したら、このoverrideを除去できるか確認します。
 
